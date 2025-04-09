@@ -3,7 +3,7 @@ import createMenu from './libs/createMenu.js';
 createMenu(
   'Depression i Indien',
   [
-    { name: 'Startsida', script: 'startsida.js' }, // 👈 Ny rad för startsidan
+    { name: 'Startsida', script: 'startsida.js' },
     { name: 'Test av normalfördelning', script: 'testingnormal.js' },
     { name: 'Sömn och depression', script: 'sleep-depression.js' },
     { name: 'Akademisk press', script: 'academic-pressure.js' },
@@ -16,7 +16,3 @@ createMenu(
   ]
 );
 
-// ✅ Ladda startsidan automatiskt om ingen hash är satt
-if (!location.hash || location.hash === '#') {
-  location.hash = '#Startsida';
-}

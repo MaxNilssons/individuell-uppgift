@@ -11,7 +11,9 @@ const port = 3005;
 const app = express();
 
 // Path to this folder
-const dirname = import.meta.dirname;
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(__filename);
 
 // respond when people are trying to libs by import
 // (now they are all bundled - so they should stop, but we're kind)

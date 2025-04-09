@@ -6,11 +6,11 @@ import drawGoogleChart from './libs/drawGoogleChart.js';
 
 addMdToPage('## Depression per stad');
 
-// Dropdown för kön
+
 let selectedGender = addDropdown('Kön', ['Alla', 'Male', 'Female']);
 addMdToPage(`**Valt kön: ${selectedGender}**`);
 
-// SQL-filter för kön
+
 let genderFilter = selectedGender !== 'Alla' ? `AND gender = '${selectedGender}'` : '';
 
 let cityData = await dbQuery(`
@@ -28,7 +28,7 @@ let cityData = await dbQuery(`
 if (cityData.length > 0) {
   tableFromData({ data: cityData });
 
-  // För diagrammet
+
   let chartData = [['Stad', 'Genomsnittlig depression']];
   cityData.forEach(row => {
     chartData.push([row.city, parseFloat(row.depressionRate)]);

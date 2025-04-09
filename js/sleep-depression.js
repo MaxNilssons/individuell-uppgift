@@ -61,6 +61,5 @@ if (allStudents.length > 0) {
       height: 500
     }
   });
-} else {
-  addMdToPage('⚠️ Ingen data att visa för det valda könet.');
-}
+};
+

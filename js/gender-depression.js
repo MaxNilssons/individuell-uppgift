@@ -6,7 +6,7 @@ import drawGoogleChart from './libs/drawGoogleChart.js';
 
 addMdToPage('## Gender and depression');
 
-// Dropdown för kön
+
 let selectedGender = addDropdown('Kön', ['All', 'Male', 'Female']);
 
 let genderData;

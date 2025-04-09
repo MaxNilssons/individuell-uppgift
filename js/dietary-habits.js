@@ -6,11 +6,11 @@ import drawGoogleChart from './libs/drawGoogleChart.js';
 
 addMdToPage('## Kostvanor och depression');
 
-// 🔽 Dropdown för kön
+// Dropdown 
 let selectedGender = addDropdown('Kön', ['Alla', 'Male', 'Female']);
 addMdToPage(`**Valt kön: ${selectedGender}**`);
 
-// Mappning: siffervärden till etiketter
+// Siffror till ord för lättare förståelse 
 const dietLabels = {
   1: 'Ohälsosam',
   2: 'Medel',
