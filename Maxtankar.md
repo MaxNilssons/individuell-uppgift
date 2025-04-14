@@ -130,3 +130,21 @@ Det finns också andra aspekter jag behöver testa för att utföra uppgiften ko
 ![alt text](image-3.png)
 
 Den raden är tillagd för att få T-testet att fungera, vet ej om det är rätt eller fel...
+
+
+### Korrelation
+Fortsättningsvis har jag börjat kolla på Korrelation mellan CGPA och depression. 
+Till en början hade jag inget medelvärde med, utan bara 0/1 (ja/nej på depression) 
+Men det tyckte jag inte så mycket. 
+Därefter la jag in
+``` sql
+let groupedData = await dbQuery(`
+  SELECT ROUND(cgpa, 0) as roundedCgpa,
+         ROUND(AVG(depression), 4) as avgDepression
+  FROM result_new
+  GROUP BY roundedCgpa
+  ORDER BY roundedCgpa
+`);
+```
+för att kunna visa resultatet nedan. 
+![alt text](image-4.png)

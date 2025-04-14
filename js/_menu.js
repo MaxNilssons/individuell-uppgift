@@ -6,6 +6,7 @@ createMenu(
     { name: 'Startsida', script: 'startsida.js' },
     { name: 'testavTtest', script: 'testavTtest.js' },
     { name: 'Test av normalfördelning', script: 'testingnormal.js' },
+    { name: 'Korrelation', script: 'cgpa-korrelation.js' },
     { name: 'Sömn och depression', script: 'sleep-depression.js' },
     { name: 'Akademisk press', script: 'academic-pressure.js' },
     { name: 'Kostvanor', script: 'dietary-habits.js' },

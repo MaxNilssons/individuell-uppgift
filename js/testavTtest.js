@@ -2,7 +2,7 @@ import addMdToPage from './libs/addMdToPage.js';
 import dbQuery from './libs/dbQuery.js';
 import drawGoogleChart from './libs/drawGoogleChart.js';
 
-addMdToPage('## T-test: CGPA < 7 vs ≥ 7 och depression');
+addMdToPage('## T-test: CGPA och depression');
 
 let rawData = await dbQuery(`
   SELECT cgpa, depression
