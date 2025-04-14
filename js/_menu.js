@@ -4,6 +4,7 @@ createMenu(
   'Depression i Indien',
   [
     { name: 'Startsida', script: 'startsida.js' },
+    { name: 'testavTtest', script: 'testavTtest.js' },
     { name: 'Test av normalfördelning', script: 'testingnormal.js' },
     { name: 'Sömn och depression', script: 'sleep-depression.js' },
     { name: 'Akademisk press', script: 'academic-pressure.js' },
@@ -12,7 +13,8 @@ createMenu(
     { name: 'CGPA och depression', script: 'cgpa-depression.js' },
     { name: 'Kön och depression', script: 'gender-depression.js' },
     { name: 'Antal timmar och depression', script: 'studyhours-depression.js' },
-    { name: 'Stad och depression', script: 'city-depression.js' }
+    { name: 'Stad och depression', script: 'city-depression.js' },
+    { name: 'Sammanfattningsvis', script: 'summary.js' },
   ]
 );
 

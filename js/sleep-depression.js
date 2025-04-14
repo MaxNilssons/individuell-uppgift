@@ -42,6 +42,23 @@ if (allStudents.length > 0) {
     ]);
   });
 
+  let groupA = []; // Sömn ≥ 7h
+  let groupB = []; // Sömn < 7h
+
+  allStudents.forEach(row => {
+    if (row.sleepDuration != null && row.avgDepression != null) {
+      const value = parseFloat(row.avgDepression);
+      if (row.sleepDuration >= 7) {
+        groupA.push(value);
+      } else {
+        groupB.push(value);
+      }
+    }
+  });
+
+
+
+
   addMdToPage('### Diagram: Sömn och depression');
   drawGoogleChart({
     type: 'ColumnChart',

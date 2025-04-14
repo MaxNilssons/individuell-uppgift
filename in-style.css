@@ -49,3 +49,7 @@ table {
 label.dropdown+label.dropdown {
   margin-top: -20px !important;
 }
+
+main {
+  padding-top: 100px;
+}
