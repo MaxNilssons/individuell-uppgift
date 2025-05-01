@@ -1,15 +1,35 @@
+addMdToPage(`
+# Psykisk ohälsa bland studenter i Indien
 
+Det här projektet handlar om att undersöka hur olika faktorer hänger ihop med psykisk ohälsa bland studenter i Indien, baserat på enkätsvar från tusentals deltagare.
 
-addMdToPage(`# Depression i Indien
+Jag har analyserat samband mellan **depression** och faktorer som:
 
-En interaktiv rapport om psykisk ohälsa bland studenter i Indien.
+- Akademiska prestationer (CGPA)
+- Sömnvanor
+- Upplevd akademisk press
+- Kost och livsstil
+- Mental ohälsa i familjen
+- Kön
+- Studietid per dag
 
-Navigera mellan sidorna i menyn för att se:
+Genom att kombinera databasfrågor, statistiska analyser och interaktiva visualiseringar har jag försökt identifiera mönster och förstå vilka faktorer som påverkar psykiskt mående mest.
 
-- Samband mellan sömn, kost och depression  
-- Differanser mellan kön  
-- Visualiseringar med filtrering  
-- Statistiska analyser som T-test och normalfördelning (PÅ SIKT?)
+---
 
+## Metod
+
+Datan kommer från en strukturerad enkätundersökning bland studenter i Indien. Jag har importerat datan till en SQLite-databas och använt SQL-frågor för att hämta relevanta värden.
+
+Med hjälp av mallen har jag: 
+- Grupperat data och beräknat medelvärden
+- Genomfört statistiska tester (t.ex. t-test och korrelation)
+- Visualiserat resultaten i interaktiva diagram via Google Charts
+- Tillämpat filter (ex. kön) med dropdown för att kunna jämföra grupper
+
+Resultaten har jag tolkat och diskuterat i varje undersökning, samt sammanfattat allt i en avslutande analys.
+
+---
+
+Välj en sida i menyn högst upp för att se information om en specifik faktor.
 `);
-

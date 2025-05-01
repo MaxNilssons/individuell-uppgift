@@ -42,7 +42,7 @@ drawGoogleChart({
     legend: 'none'
   }
 });
-
+//
 addMdToPage(`---
 
 ##  Resultat
