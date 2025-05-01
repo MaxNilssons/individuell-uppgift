@@ -45,7 +45,7 @@ drawGoogleChart({
 
 addMdToPage(`---
 
-## 📈 Resultat
+##  Resultat
 
 **Korrelationskoefficient (r):** ${r.toFixed(3)}  
 
@@ -54,7 +54,7 @@ addMdToPage(`---
 
 ---
 
-## 💡 Fördel med detta tillvägagångssätt
+##  Fördel med detta tillvägagångssätt
 
 Eftersom vi räknar på **medelvärden per grupp**, dämpas brus och eventuella extremvärden. Det gör att sambandet blir lättare att visualisera och tolka.
 

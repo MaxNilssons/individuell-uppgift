@@ -148,3 +148,9 @@ let groupedData = await dbQuery(`
 ```
 för att kunna visa resultatet nedan. 
 ![alt text](image-4.png)
+
+## Forsatt arbete med denna efter grupparbete
+
+
+Vad är det som efterfrågas egentligen?
+Behöver gå igenom det jag gjorde innan och förmodligen revidera en hel del

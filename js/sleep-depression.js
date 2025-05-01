@@ -18,7 +18,9 @@ let avgSleep = await dbQuery(`
   ${selectedGender !== 'Alla' ? `AND gender = '${selectedGender}'` : ''}
 `);
 
-addMdToPage(`**Genomsnittlig sömn för alla: ${avgSleep[0].avgSleepDuration} timmar per natt**`);
+let genderLabel = selectedGender === 'Alla' ? 'alla studenter' : (selectedGender === 'Male' ? 'manliga studenter' : 'kvinnliga studenter');
+addMdToPage(`**Genomsnittlig sömn för ${genderLabel}: ${avgSleep[0].avgSleepDuration} timmar per natt**`);
+
 
 
 let genderFilter = selectedGender !== 'Alla' ? `AND gender = '${selectedGender}'` : '';
@@ -56,6 +58,10 @@ if (allStudents.length > 0) {
     }
   });
 
+  addMdToPage(`
+> **Notera:** För att kunna räkna på sömnens påverkan har jag omvandlat de ursprungliga intervall-svaren (som "6–7 timmar") till ungefärliga medelvärden.  
+> Till exempel blev "5–6 timmar" till 5.5. Det här gjorde jag för att kunna använda datan i beräkningar och diagram.
+`);
 
 
 
