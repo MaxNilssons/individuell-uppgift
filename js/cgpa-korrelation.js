@@ -1,6 +1,6 @@
 addMdToPage('## Korrelation mellan CGPA och depression (medelvärde per betygsgrupp)');
 
-// Hämta medelvärde av depression per avrundad CGPA
+
 let groupedData = await dbQuery(`
   SELECT ROUND(cgpa, 0) as roundedCgpa,
          ROUND(AVG(depression), 4) as avgDepression

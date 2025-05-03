@@ -1,53 +1,56 @@
-import addMdToPage from './libs/addMdToPage.js';
-import dbQuery from './libs/dbQuery.js';
-import tableFromData from './libs/tableFromData.js';
-import drawGoogleChart from './libs/drawGoogleChart.js';
-import addDropdown from './libs/addDropdown.js';
+
 
 addMdToPage('## Psykisk ohälsa i familjen och depression');
 
-// Dropdown för kön
-let selectedGender = addDropdown('Kön', ['Alla', 'Male', 'Female']);
-let genderLabel = selectedGender === 'Alla' ? 'alla studenter' :
-  selectedGender === 'Male' ? 'manliga studenter' :
-    'kvinnliga studenter';
+// Dropdown för kön (svenska etiketter)
+let selectedGender = await addDropdown('Kön:', ['Alla', 'Man', 'Kvinna']);
+
+// Anpassa etikett och filter
+let genderLabel = selectedGender === 'Alla'
+  ? 'alla studenter'
+  : selectedGender === 'Man'
+    ? 'manliga studenter'
+    : 'kvinnliga studenter';
+
+let genderFilter = '';
+if (selectedGender === 'Man') {
+  genderFilter = `WHERE gender = 'Male'`;
+} else if (selectedGender === 'Kvinna') {
+  genderFilter = `WHERE gender = 'Female'`;
+}
 
 // Inledning
 addMdToPage(`
 > Den här analysen undersöker om det finns ett samband mellan psykisk ohälsa i familjen och om ${genderLabel} uppger depression.  
 > Depression är kodad som \`0 = Nej\` och \`1 = Ja\`, vilket gör att medelvärdet motsvarar andelen som svarat "ja".
 
-Analysen baseras på svar från ${genderLabel}. Tabellen och diagrammet visar hur andelen med depression skiljer sig beroende på om det finns psykisk ohälsa i familjen eller inte. Vad jag kan se så är skillnader mellan könen obefintliga
+Analysen baseras på svar från ${genderLabel}. Tabellen och diagrammet visar hur andelen med depression skiljer sig beroende på om det finns psykisk ohälsa i familjen eller inte. Vad jag kan se så är skillnader mellan könen obefintliga.
 `);
 
-// Korrekt filtrerad SQL-fråga
+// Hämta data från databasen
 let mentalIllness = await dbQuery(`
   SELECT historyMentalIllness, ROUND(AVG(depression), 2) as depressionRate, COUNT(*) as total
   FROM result_new
-  ${selectedGender !== 'Alla' ? `WHERE gender = '${selectedGender}'` : ''}
+  ${genderFilter}
   GROUP BY historyMentalIllness;
 `);
 
-// Omvandla 0/1 till etiketter
+// Etikettera 0/1 till text
 mentalIllness.forEach(row => {
-  if (row.historyMentalIllness === 1) {
-    row.historyMentalIllness = '1 (Ja)';
-  } else if (row.historyMentalIllness === 0) {
-    row.historyMentalIllness = '0 (Nej)';
-  }
+  row.historyMentalIllness = row.historyMentalIllness === 1 ? '1 (Ja)' : '0 (Nej)';
 });
 
 // Visa tabell
 tableFromData({ data: mentalIllness });
 
-// Förbered diagram
+// Förbered data till diagram
 let mentalChartData = [['Psykisk ohälsa i familjen', 'Andel med depression']];
 mentalIllness.forEach(row => {
-  let label = row.historyMentalIllness.includes('(Ja)') ? 'Ja' : 'Nej';
+  const label = row.historyMentalIllness.includes('(Ja)') ? 'Ja' : 'Nej';
   mentalChartData.push([label, parseFloat(row.depressionRate)]);
 });
 
-// Visa diagram
+// Visa stapeldiagram
 addMdToPage(`### Diagram: Andel deprimerade (${genderLabel}) – beroende på psykisk ohälsa i familjen`);
 drawGoogleChart({
   type: 'ColumnChart',

@@ -1,16 +1,23 @@
-import addMdToPage from './libs/addMdToPage.js';
-import dbQuery from './libs/dbQuery.js';
-import tableFromData from './libs/tableFromData.js';
-import drawGoogleChart from './libs/drawGoogleChart.js';
-import addDropdown from './libs/addDropdown.js';
+
 
 addMdToPage('## Betyg (CGPA) och depression');
 
-// Dropdown för kön
-let selectedGender = addDropdown('Kön', ['Alla', 'Male', 'Female']);
-let genderLabel = selectedGender === 'Alla' ? 'alla studenter' :
-  selectedGender === 'Male' ? 'manliga studenter' :
-    'kvinnliga studenter';
+
+let selectedGender = await addDropdown('Kön:', ['Alla', 'Man', 'Kvinna']);
+
+
+let genderLabel = selectedGender === 'Alla'
+  ? 'alla studenter'
+  : selectedGender === 'Man'
+    ? 'manliga studenter'
+    : 'kvinnliga studenter';
+
+let genderFilter = '';
+if (selectedGender === 'Man') {
+  genderFilter = `WHERE gender = 'Male'`;
+} else if (selectedGender === 'Kvinna') {
+  genderFilter = `WHERE gender = 'Female'`;
+}
 
 addMdToPage(`
 > Den här analysen undersöker om det finns ett samband mellan betyg (CGPA) och hur stor andel av ${genderLabel} som uppger depression.  
@@ -20,7 +27,10 @@ addMdToPage(`
 Tabellen och diagrammet visar hur andelen som uppger depression förändras beroende på betyget, avrundat till hela tal (t.ex. 6, 7, 8).
 `);
 
-let genderFilter = selectedGender !== 'Alla' ? `WHERE gender = '${selectedGender}'` : '';
+addMdToPage(`
+> **Notering:** Värdet CGPA = 0 har uteslutits eftersom endast 9 personer uppgav detta, vilket inte är ett tillräckligt underlag för att dra säkra slutsatser.
+`);
+
 
 let cgpaDepression = await dbQuery(`
   SELECT ROUND(cgpa, 0) as roundedCgpa, 
@@ -29,17 +39,24 @@ let cgpaDepression = await dbQuery(`
   FROM result_new 
   ${genderFilter}
   GROUP BY roundedCgpa 
+  HAVING roundedCgpa > 0
   ORDER BY roundedCgpa;
 `);
 
+
 tableFromData({ data: cgpaDepression });
+
 
 let cgpaChartData = [['CGPA (avrundad)', 'Andel med depression']];
 cgpaDepression.forEach(row => {
   if (row.roundedCgpa !== null && row.depressionRate !== null) {
-    cgpaChartData.push([parseFloat(row.roundedCgpa), parseFloat(row.depressionRate)]);
+    cgpaChartData.push([
+      parseFloat(row.roundedCgpa),
+      parseFloat(row.depressionRate)
+    ]);
   }
 });
+
 
 addMdToPage(`### Diagram: CGPA och andel depression (${genderLabel})`);
 drawGoogleChart({

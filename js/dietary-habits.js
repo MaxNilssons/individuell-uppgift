@@ -1,25 +1,27 @@
-import addMdToPage from './libs/addMdToPage.js';
-import addDropdown from './libs/addDropdown.js';
-import dbQuery from './libs/dbQuery.js';
-import tableFromData from './libs/tableFromData.js';
-import drawGoogleChart from './libs/drawGoogleChart.js';
+
 
 addMdToPage('## Kostvanor och depression');
 
-// Dropdown 
-let selectedGender = addDropdown('Kön', ['Alla', 'Male', 'Female']);
+// Dropdown med svenska könsalternativ
+let selectedGender = await addDropdown('Kön', ['Alla', 'Man', 'Kvinna']);
 addMdToPage(`**Valt kön: ${selectedGender}**`);
 
-// Siffror till ord för lättare förståelse 
+// Översättning till databaskodning
+let genderFilter = '';
+if (selectedGender === 'Man') {
+  genderFilter = `AND gender = 'Male'`;
+} else if (selectedGender === 'Kvinna') {
+  genderFilter = `AND gender = 'Female'`;
+}
+
+// Tydligare etiketter för kostvanor
 const dietLabels = {
   1: 'Ohälsosam',
   2: 'Medel',
   3: 'Hälsosam'
 };
 
-
-let genderFilter = selectedGender !== 'Alla' ? `AND gender = '${selectedGender}'` : '';
-
+// Hämta medelvärde depression per kostvana
 let dietaryDepression = await dbQuery(`
   SELECT dietaryHabits, ROUND(AVG(depression), 2) as depressionRate, COUNT(*) as total 
   FROM result_new 
@@ -28,13 +30,15 @@ let dietaryDepression = await dbQuery(`
   ORDER BY dietaryHabits;
 `);
 
+// Byt ut sifferkoder till text
 dietaryDepression.forEach(row => {
   row.dietaryHabits = dietLabels[row.dietaryHabits] || row.dietaryHabits;
 });
 
+// Visa tabell
 tableFromData({ data: dietaryDepression });
 
-
+// Förberedd data för diagram
 let dietChartData = [['Kostvanor', 'Depression']];
 dietaryDepression.forEach(row => {
   if (row.dietaryHabits && row.depressionRate !== null) {
@@ -45,6 +49,7 @@ dietaryDepression.forEach(row => {
   }
 });
 
+// Visa stapeldiagram
 addMdToPage('### Diagram: Kostvanor och depression');
 drawGoogleChart({
   type: 'ColumnChart',
