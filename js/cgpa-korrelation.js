@@ -1,6 +1,6 @@
+addMdToPage('## Korrelation mellan CGPA och depression (medelvärde per betygsgrupp)');
 
-addMdToPage('## 📊 Korrelation mellan CGPA och depression (medelvärde per betygsgrupp)');
-
+// Hämta medelvärde av depression per avrundad CGPA
 let groupedData = await dbQuery(`
   SELECT ROUND(cgpa, 0) as roundedCgpa,
          ROUND(AVG(depression), 4) as avgDepression
@@ -25,6 +25,7 @@ groupedData.forEach(row => {
 
 const r = ss.sampleCorrelation(x, y);
 
+// Visa linjediagram för medelvärden
 drawGoogleChart({
   type: 'LineChart',
   data: corrData,
@@ -42,26 +43,69 @@ drawGoogleChart({
     legend: 'none'
   }
 });
-//
-addMdToPage(`---
 
-##  Resultat
+// Tolkning under linjediagrammet
+addMdToPage(`
+---
 
-**Korrelationskoefficient (r):** ${r.toFixed(3)}  
+## Tolkning av genomsnitt per betygsgrupp
 
-- Detta visar hur starkt sambandet är mellan **betyg** och **andelen deprimerade** per CGPA-nivå.
-- Ett värde nära 1 eller -1 indikerar ett starkt samband, medan ett värde nära 0 indikerar ett svagt samband.
+Detta diagram visar trenden i genomsnittlig depression för varje CGPA-nivå.
+Även om det ser ut att finnas en ökning, ger diagrammet i sig ingen exakt uppfattning om styrkan i sambandet.
+För det krävs en korrelationsanalys baserad på fler datapunkter, vilket visualiseras nedan.
+
+Eftersom detta är baserat på medelvärden per CGPA-grupp blir trenden tydlig utan att påverkas av extremvärden.
+Däremot är det viktigt att inte dra slutsatser om orsakssamband.
+Det kan finnas bakomliggande faktorer som påverkar både betyg och psykisk hälsa – till exempel stress, familjeförväntningar eller arbetsbörda.
+
+Tänk också på att:
+- Antalet studenter i varje CGPA-grupp kan variera
+- En stark korrelation innebär inte att höga betyg orsakar depression
+
+---
+`);
+
+// Förbered scatterdata
+let scatterData = [['CGPA', 'Depression']];
+for (let i = 0; i < x.length; i++) {
+  scatterData.push([x[i], y[i]]);
+}
+
+// Visa scatterdiagram
+drawGoogleChart({
+  type: 'ScatterChart',
+  data: scatterData,
+  options: {
+    title: 'Korrelation mellan CGPA och depression (datapunkter)',
+    hAxis: { title: 'CGPA (avrundad)' },
+    vAxis: { title: 'Genomsnittlig depression' },
+    pointSize: 5,
+    height: 400,
+    legend: 'none',
+    trendlines: { 0: {} }
+  }
+});
+
+// Analys under scatterdiagrammet
+addMdToPage(`
+---
+
+## Visualisering med datapunkter
+
+Korrelationskoefficient (r): ${r.toFixed(3)}
+
+Resultatet visar ett starkt positivt samband mellan betygsnivå (CGPA) och förekomst av depression.
+En korrelationskoefficient på ${r.toFixed(3)} tyder på att depression tenderar att öka med högre CGPA.
+Det kan verka oväntat, men det är möjligt att prestationsångest, press eller höga förväntningar är faktorer som påverkar psykiskt mående hos studenter med höga betyg.
 
 ---
 
-##  Fördel med detta tillvägagångssätt
+## Fördjupad observation
 
-Eftersom vi räknar på **medelvärden per grupp**, dämpas brus och eventuella extremvärden. Det gör att sambandet blir lättare att visualisera och tolka.
+Ett intressant mönster är att studenter med nästan högsta betyg (till exempel CGPA 9) verkar rapportera högre andel depression än de som faktiskt når CGPA 10.
+Det skulle kunna bero på att dessa studenter upplever störst press, är mest självkritiska, eller strävar efter perfektion utan att riktigt nå dit.
 
-Men tänk på att:
-
-- Antalet studenter per CGPA-nivå varierar
-- Vi kan fortfarande inte säga något om **orsakssamband**
+Denna typ av observation bör tolkas med försiktighet eftersom den kan påverkas av andra faktorer, stora som små.
 
 ---
 `);
