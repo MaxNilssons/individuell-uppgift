@@ -1,4 +1,4 @@
-addMarkdownToPage(`
+addMdToPage(`
 ## Sammanfattande analys: Psykisk ohälsa bland studenter i Indien
 
 I detta projekt har jag analyserat hur olika faktorer samverkar med psykisk ohälsa bland studenter i Indien. Fokus har legat på att undersöka möjliga samband mellan depression och faktorer såsom akademisk prestation, sömnvanor, kost och kön. Syftet har varit att identifiera mönster och reflektera över deras möjliga betydelse.
@@ -27,13 +27,35 @@ En granskning av CGPA-data visade att den inte är perfekt normalfördelad. Dett
 
 Projektet har gett en ökad förståelse för komplexiteten i psykisk ohälsa bland studenter. Flera mätbara samband har identifierats, särskilt kopplingen mellan akademisk press och depressionsnivåer. Det är tydligt att psykisk ohälsa inte kan förklaras av en enskild faktor, utan är resultatet av flera samverkande orsaker. Arbetet har också bidragit till ökad färdighet i att bearbeta och tolka statistisk data.
 
+## Reflektion: Vad jag lärde mig
+
+Under arbetets gång lärde jag mig att analysera data på ett mer strukturerat sätt med hjälp av SQL, statistik och JavaScript. Jag fick också insikt i hur faktorer som sömn, betyg, kön och psykisk ohälsa i familjen kan relatera till depression bland studenter.
+
+Jag fick träna på att:
+- Tillämpa statistiska metoder som t-test och korrelation
+- Visualisera data med hjälp av interaktiva diagram
+- Tolka resultat kritiskt och förstå begrepp som kausalitet och bias
+- Filtrera data utifrån grupper, till exempel kön
+
+### Utmaningar
+
+En utmaning var att tolka data där svaren var kvalitativa (exempelvis "7–8 timmar sömn") och omvandla dem till kvantitativa värden som gick att räkna på. Det var också viktigt att tänka på att viss data, som CGPA, inte alltid är perfekt normalfördelad, vilket påverkar vilka tester som är lämpliga att använda.
+
+Att bygga upp ett interaktivt och tydligt gränssnitt för varje analys med dropdown-menyer, tabeller och diagram krävde också en hel del testning och justeringar.
+
+### Sammanfattning
+
+Projektet gav mig en bättre förståelse för hur man kombinerar programmering, databashantering och statistisk analys för att undersöka samhällsfrågor. Det var både utmanande och lärorikt – och framför allt relevant för att förstå psykisk ohälsa i ett större sammanhang.
+
 ## Källor och bakgrund
 
-- WHO (2022). *Mental health: Strengthening our response*  
-  https://www.who.int/news-room/fact-sheets/detail/mental-health-strengthening-our-response
+- India Today (2024). *Mental health crisis: Why is mental health education important for students?*  
+  https://www.indiatoday.in/education-today/featurephilia/story/mental-health-crisis-why-is-mental-health-education-important-for-students-2641662-2024-11-28
 
-- National Institute of Mental Health. *Depression*  
-  https://www.nimh.nih.gov/health/topics/depression
+- Natarajan, R. (2015). *Higher education in India: The need for change*. Procedia - Social and Behavioral Sciences, Elsevier.  
+  https://www.sciencedirect.com/science/article/abs/pii/S1876201815301179
 
 Dessa källor har bidragit till att ge kontext åt analysen och ökad förståelse för ämnet psykisk ohälsa.
+
+Max Nilsson DM 24
 `);

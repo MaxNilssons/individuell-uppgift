@@ -28,8 +28,20 @@ Med hjälp av mallen har jag:
 - Tillämpat filter (ex. kön) med dropdown för att kunna jämföra grupper
 
 Resultaten har jag tolkat och diskuterat i varje undersökning, samt sammanfattat allt i en avslutande analys.
-
+Välj en sida i menyn högst upp för att se information om en specifik faktor.
 ---
 
-Välj en sida i menyn högst upp för att se information om en specifik faktor.
+
+`);
+
+addMdToPage(`
+## Indisk kontext: Studier, ekonomi och press
+
+För att förstå resultaten är det viktigt att sätta dem i en social och kulturell kontext. I Indien är universitetsstudier starkt kopplade till framtida försörjning, status och familjens förväntningar.  
+
+Det indiska utbildningssystemet är mycket konkurrensutsatt. Antagningsprocesser till eftergymnasiala utbildningar är ofta baserade på hårda inträdesprov, vilket skapar stress redan innan studierna börjar.  
+
+Universitetsutbildning är i många fall inte gratis, och många studenter tar lån eller måste arbeta vid sidan av. Särskilt studenter från landsbygden eller fattigare delstater bär ofta ett större ansvar att lyckas – inte bara för sig själva, utan för hela familjen.
+
+Sammantaget skapar detta en miljö där akademisk press och mental ohälsa lätt kan kopplas samman – något som också syns i dataanalysen.
 `);
