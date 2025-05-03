@@ -25,10 +25,9 @@ Med hjälp av mallen har jag:
 - Grupperat data och beräknat medelvärden
 - Genomfört statistiska tester (t.ex. t-test och korrelation)
 - Visualiserat resultaten i interaktiva diagram via Google Charts
-- Tillämpat filter (ex. kön) med dropdown för att kunna jämföra grupper
+- Tillämpat filter (ex. kön) med dropdown för att kunna jämföra grupper.
 
-Resultaten har jag tolkat och diskuterat i varje undersökning, samt sammanfattat allt i en avslutande analys.
-Välj en sida i menyn högst upp för att se information om en specifik faktor.
+
 ---
 
 
