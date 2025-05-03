@@ -9,6 +9,7 @@ createMenu(
     { name: 'Kostvanor', script: 'dietary-habits.js' },
     { name: 'Psykisk ohälsa i familjen', script: 'mental-history.js' },
     { name: 'CGPA och depression', script: 'cgpa-depression.js' },
+    { name: 'Nöjdhet med studier', script: 'satisfaction-depression.js' },
     { name: 'Antal timmar och depression', script: 'studyhours-depression.js' },
     { name: 'Sammanfattning & analys', script: 'summary.js', }
   ]
