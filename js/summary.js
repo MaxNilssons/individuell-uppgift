@@ -1,7 +1,9 @@
 addMdToPage(`
 ## Sammanfattande analys: Psykisk ohälsa bland studenter i Indien
 
-I detta projekt har jag analyserat hur olika faktorer samverkar med psykisk ohälsa bland studenter i Indien. Fokus har legat på att undersöka möjliga samband mellan depression och faktorer såsom akademisk prestation, sömnvanor, kost och kön. Syftet har varit att identifiera mönster och reflektera över deras möjliga betydelse.
+I detta projekt har jag analyserat hur olika faktorer samverkar med psykisk ohälsa bland studenter i Indien. 
+Fokus har legat på att undersöka möjliga samband mellan depression och faktorer såsom akademisk prestation, sömnvanor, kost och kön. 
+Syftet har varit att identifiera mönster och reflektera över deras möjliga betydelse.
 
 ### Akademiska prestationer och depression
 
@@ -25,11 +27,15 @@ En granskning av CGPA-data visade att den inte är perfekt normalfördelad. Dett
 
 ## Slutsats
 
-Projektet har gett en ökad förståelse för komplexiteten i psykisk ohälsa bland studenter. Flera mätbara samband har identifierats, särskilt kopplingen mellan akademisk press och depressionsnivåer. Det är tydligt att psykisk ohälsa inte kan förklaras av en enskild faktor, utan är resultatet av flera samverkande orsaker. Arbetet har också bidragit till ökad färdighet i att bearbeta och tolka statistisk data.
+Projektet har gett en ökad förståelse för komplexiteten i psykisk ohälsa bland studenter. Flera mätbara samband har identifierats, särskilt kopplingen mellan akademisk press och depressionsnivåer. 
+Det är tydligt att psykisk ohälsa inte kan förklaras av en enskild faktor, utan är resultatet av flera samverkande orsaker. Arbetet har också bidragit till ökad färdighet i att bearbeta och tolka statistisk data.
 
 ## Reflektion: Vad jag lärde mig
 
-Under arbetets gång lärde jag mig att analysera data på ett mer strukturerat sätt med hjälp av SQL, statistik och JavaScript. Jag fick också insikt i hur faktorer som sömn, betyg, kön och psykisk ohälsa i familjen kan relatera till depression bland studenter.
+Under arbetets gång lärde jag mig att analysera data på ett mer strukturerat sätt med hjälp av SQL, statistik och JavaScript.
+ Jag fick också insikt i hur faktorer som sömn, betyg, kön och psykisk ohälsa i familjen kan relatera till depression bland studenter.
+Det är ju något man själv som student kan känna av, att framförallt sömn och kost kan påverka ens prestation i skolan något enormt.
+
 
 Jag fick träna på att:
 - Tillämpa statistiska metoder som t-test och korrelation
@@ -39,13 +45,16 @@ Jag fick träna på att:
 
 ### Utmaningar
 
-En utmaning var att tolka data där svaren var kvalitativa (exempelvis "7–8 timmar sömn") och omvandla dem till kvantitativa värden som gick att räkna på. Det var också viktigt att tänka på att viss data, som CGPA, inte alltid är perfekt normalfördelad, vilket påverkar vilka tester som är lämpliga att använda.
+En utmaning var att tolka data där svaren var kvalitativa (exempelvis "7–8 timmar sömn") och omvandla dem till kvantitativa värden som gick att räkna på. 
+Här fick jag ju sätta egna värden och resultaten hade kunnat se tämligen annorlunda ut om jag från start hade gett dom värden med högre differans.
+
 
 Att bygga upp ett interaktivt och tydligt gränssnitt för varje analys med dropdown-menyer, tabeller och diagram krävde också en hel del testning och justeringar.
 
 ### Sammanfattning
 
-Projektet gav mig en bättre förståelse för hur man kombinerar programmering, databashantering och statistisk analys för att undersöka samhällsfrågor. Det var både utmanande och lärorikt – och framför allt relevant för att förstå psykisk ohälsa i ett större sammanhang.
+Projektet gav mig en bättre förståelse för hur man kombinerar programmering, databashantering och statistisk analys för att undersöka samhällsfrågor.
+ Det var både utmanande och lärorikt – och framför allt relevant för att förstå psykisk ohälsa i ett större sammanhang.
 
 ## Källor och bakgrund
 

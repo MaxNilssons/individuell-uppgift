@@ -1,10 +1,10 @@
 addMdToPage('## Sömn och depression');
 
-// Könsval: Man, Kvinna, Alla
+
 let selectedGender = await addDropdown('Kön', ['Alla', 'Man', 'Kvinna']);
 addMdToPage(`**Valt kön: ${selectedGender}**`);
 
-/
+
 let genderFilter = '';
 if (selectedGender === 'Man') {
   genderFilter = `AND gender = 'Male'`;
