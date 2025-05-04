@@ -1,10 +1,6 @@
-
-
 addMdToPage('## Betyg (CGPA) och depression');
 
-
 let selectedGender = await addDropdown('Kön:', ['Alla', 'Man', 'Kvinna']);
-
 
 let genderLabel = selectedGender === 'Alla'
   ? 'alla studenter'
@@ -31,7 +27,6 @@ addMdToPage(`
 > **Notering:** Värdet CGPA = 0 har uteslutits eftersom endast 9 personer uppgav detta, vilket inte är ett tillräckligt underlag för att dra säkra slutsatser.
 `);
 
-
 let cgpaDepression = await dbQuery(`
   SELECT ROUND(cgpa, 0) as roundedCgpa, 
          ROUND(AVG(depression), 2) as depressionRate, 
@@ -43,20 +38,12 @@ let cgpaDepression = await dbQuery(`
   ORDER BY roundedCgpa;
 `);
 
-
 tableFromData({ data: cgpaDepression });
 
-
-let cgpaChartData = [['CGPA (avrundad)', 'Andel med depression']];
-cgpaDepression.forEach(row => {
-  if (row.roundedCgpa !== null && row.depressionRate !== null) {
-    cgpaChartData.push([
-      parseFloat(row.roundedCgpa),
-      parseFloat(row.depressionRate)
-    ]);
-  }
+let cgpaChartData = makeChartFriendly(cgpaDepression, {
+  x: "roundedCgpa",
+  y: "depressionRate"
 });
-
 
 addMdToPage(`### Diagram: CGPA och andel depression (${genderLabel})`);
 drawGoogleChart({

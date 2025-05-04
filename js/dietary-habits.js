@@ -1,7 +1,4 @@
-
-
 addMdToPage('## Kostvanor och depression');
-
 
 let selectedGender = await addDropdown('Kön', ['Alla', 'Man', 'Kvinna']);
 addMdToPage(`**Valt kön: ${selectedGender}**`);
@@ -20,7 +17,6 @@ const dietLabels = {
   3: 'Hälsosam'
 };
 
-
 let dietaryDepression = await dbQuery(`
   SELECT dietaryHabits, ROUND(AVG(depression), 2) as depressionRate, COUNT(*) as total 
   FROM result_new 
@@ -29,43 +25,33 @@ let dietaryDepression = await dbQuery(`
   ORDER BY dietaryHabits;
 `);
 
-
+// Byt ut siffror mot textetiketter
 dietaryDepression.forEach(row => {
   row.dietaryHabits = dietLabels[row.dietaryHabits] || row.dietaryHabits;
 });
 
-
 tableFromData({ data: dietaryDepression });
 
-
-let dietChartData = [['Kostvanor', 'Depression']];
-dietaryDepression.forEach(row => {
-  if (row.dietaryHabits && row.depressionRate !== null) {
-    dietChartData.push([
-      row.dietaryHabits,
-      parseFloat(row.depressionRate)
-    ]);
-  }
+// Använd makeChartFriendly
+let dietChartData = makeChartFriendly(dietaryDepression, {
+  x: "dietaryHabits",
+  y: "depressionRate"
 });
-
 
 addMdToPage('### Diagram: Kostvanor och depression');
 drawGoogleChart({
   type: 'ColumnChart',
   data: dietChartData,
   options: {
-    title: `Depression per kostkvalitet (${selectedGender})`,
-    hAxis: {
-      title: 'Kostvanor'
-    },
+    title: `Kostvanor och depression (${selectedGender})`,
+    hAxis: { title: 'Kostvanor' },
     vAxis: {
-      title: 'Depression',
+      title: 'Andel med depression (0–1)',
       minValue: 0,
-      maxValue: 1,
       viewWindow: { min: 0, max: 1 }
     },
-    bar: { groupWidth: '30%' },
-    height: 400,
+    pointSize: 5,
+    height: 500,
     legend: 'none'
   }
 });

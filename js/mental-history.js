@@ -1,10 +1,6 @@
-
-
 addMdToPage('## Psykisk ohälsa i familjen och depression');
 
-
 let selectedGender = await addDropdown('Kön:', ['Alla', 'Man', 'Kvinna']);
-
 
 let genderLabel = selectedGender === 'Alla'
   ? 'alla studenter'
@@ -19,14 +15,12 @@ if (selectedGender === 'Man') {
   genderFilter = `WHERE gender = 'Female'`;
 }
 
-
 addMdToPage(`
 > Den här analysen undersöker om det finns ett samband mellan psykisk ohälsa i familjen och om ${genderLabel} uppger depression.  
 > Depression är kodad som \`0 = Nej\` och \`1 = Ja\`, vilket gör att medelvärdet motsvarar andelen som svarat "ja".
 
 Analysen baseras på svar från ${genderLabel}. Tabellen och diagrammet visar hur andelen med depression skiljer sig beroende på om det finns psykisk ohälsa i familjen eller inte. Vad jag kan se så är skillnader mellan könen obefintliga.
 `);
-
 
 let mentalIllness = await dbQuery(`
   SELECT historyMentalIllness, ROUND(AVG(depression), 2) as depressionRate, COUNT(*) as total
@@ -35,21 +29,17 @@ let mentalIllness = await dbQuery(`
   GROUP BY historyMentalIllness;
 `);
 
-// Etikettera 0/1 till text
+// Byt etiketter tydligt
 mentalIllness.forEach(row => {
-  row.historyMentalIllness = row.historyMentalIllness === 1 ? '1 (Ja)' : '0 (Nej)';
+  row.historyMentalIllness = row.historyMentalIllness === 1 ? 'Ja' : 'Nej';
 });
-
 
 tableFromData({ data: mentalIllness });
 
-
-let mentalChartData = [['Psykisk ohälsa i familjen', 'Andel med depression']];
-mentalIllness.forEach(row => {
-  const label = row.historyMentalIllness.includes('(Ja)') ? 'Ja' : 'Nej';
-  mentalChartData.push([label, parseFloat(row.depressionRate)]);
+let mentalChartData = makeChartFriendly(mentalIllness, {
+  x: "historyMentalIllness",
+  y: "depressionRate"
 });
-
 
 addMdToPage(`### Diagram: Andel deprimerade (${genderLabel}) – beroende på psykisk ohälsa i familjen`);
 drawGoogleChart({

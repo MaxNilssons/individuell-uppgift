@@ -1,9 +1,7 @@
 addMdToPage('## Sömn och depression');
 
-
 let selectedGender = await addDropdown('Kön', ['Alla', 'Man', 'Kvinna']);
 addMdToPage(`**Valt kön: ${selectedGender}**`);
-
 
 let genderFilter = '';
 if (selectedGender === 'Man') {
@@ -12,7 +10,6 @@ if (selectedGender === 'Man') {
   genderFilter = `AND gender = 'Female'`;
 }
 
-// Genomsnittlig sömn
 let avgSleep = await dbQuery(`
   SELECT ROUND(AVG(sleepDuration), 2) as avgSleepDuration
   FROM result_new
@@ -28,7 +25,6 @@ let genderLabel = selectedGender === 'Alla'
 
 addMdToPage(`**Genomsnittlig sömn för ${genderLabel}: ${avgSleep[0].avgSleepDuration} timmar per natt**`);
 
-
 let allStudents = await dbQuery(`
   SELECT sleepDuration, ROUND(AVG(depression), 2) as avgDepression, COUNT(*) as total
   FROM result_new
@@ -40,12 +36,9 @@ let allStudents = await dbQuery(`
 if (allStudents.length > 0) {
   tableFromData({ data: allStudents });
 
-  let sleepChartData = [['Sleep Duration (hours)', 'Average Depression']];
-  allStudents.forEach(row => {
-    sleepChartData.push([
-      parseFloat(row.sleepDuration),
-      parseFloat(row.avgDepression)
-    ]);
+  let sleepChartData = makeChartFriendly(allStudents, {
+    x: "sleepDuration",
+    y: "avgDepression"
   });
 
   let groupA = []; // Sömn ≥ 7h

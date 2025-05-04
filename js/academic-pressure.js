@@ -1,4 +1,3 @@
-
 addMdToPage('## Akademisk press och depression');
 
 addMdToPage(`
@@ -24,14 +23,9 @@ let pressureAndDepression = await dbQuery(`
 
 tableFromData({ data: pressureAndDepression });
 
-let pressureChartData = [['Akademisk press', 'Andel depression']];
-pressureAndDepression.forEach(row => {
-  if (row.academicPressure !== null && row.depressionRate !== null) {
-    pressureChartData.push([
-      parseFloat(row.academicPressure),
-      parseFloat(row.depressionRate)
-    ]);
-  }
+let pressureChartData = makeChartFriendly(pressureAndDepression, {
+  x: "academicPressure",
+  y: "depressionRate",
 });
 
 addMdToPage('### Diagram: Akademisk press och depression');
@@ -48,7 +42,6 @@ drawGoogleChart({
     legend: 'none'
   }
 });
-
 
 addMdToPage(`
 

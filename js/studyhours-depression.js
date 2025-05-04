@@ -1,6 +1,5 @@
 addMdToPage('## Arbets- och studietid per dag och depression');
 
-
 const selectedGender = await addDropdown('Kön:', ['Alla', 'Man', 'Kvinna']);
 const genderLabel = selectedGender === 'Alla'
   ? 'alla studenter'
@@ -15,14 +14,12 @@ if (selectedGender === 'Man') {
   genderFilter = `AND gender = 'Female'`;
 }
 
-
 addMdToPage(`
 > Den här analysen undersöker om det finns ett samband mellan den totala arbetsbelastningen per dag (studier + extrajobb tror jag var sagt) och förekomsten av depression bland ${genderLabel}.  
 > Antagandet är att en högre totalbelastning kan vara kopplad till ökad risk för psykisk ohälsa.
 
 Valt kön: **${selectedGender}**
 `);
-
 
 let groupResult = await dbQuery(`
   SELECT workStudyHours, 
@@ -36,12 +33,9 @@ let groupResult = await dbQuery(`
 
 tableFromData({ data: groupResult });
 
-let chartData = [['Work + Study Hours', 'Genomsnittlig depression']];
-groupResult.forEach(row => {
-  chartData.push([
-    parseFloat(row.workStudyHours),
-    parseFloat(row.avgDepression)
-  ]);
+let chartData = makeChartFriendly(groupResult, {
+  x: "workStudyHours",
+  y: "avgDepression"
 });
 
 addMdToPage('### Diagram: Arbets- och studietid per dag och depression');
@@ -63,7 +57,7 @@ drawGoogleChart({
   }
 });
 
-// Tolkning
+
 addMdToPage(`
 ---
 
@@ -83,7 +77,7 @@ let indivData = await dbQuery(`
   ${genderFilter}
 `);
 
-// Slumpa max 500 rader för visualisering---> inte all data. to much?
+// Slumpa max 500 rader för visualisering
 let sample = indivData.sort(() => 0.5 - Math.random()).slice(0, 500);
 
 let x = [], y = [], scatterData = [['Work + Study Hours', 'Depression']];

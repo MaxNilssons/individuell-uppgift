@@ -1,6 +1,5 @@
 addMdToPage('## Korrelation mellan CGPA och depression (medelvärde per betygsgrupp)');
 
-
 let groupedData = await dbQuery(`
   SELECT ROUND(cgpa, 0) as roundedCgpa,
          ROUND(AVG(depression), 4) as avgDepression
@@ -9,7 +8,6 @@ let groupedData = await dbQuery(`
   ORDER BY roundedCgpa
 `);
 
-let corrData = [['CGPA', 'Genomsnittlig depression']];
 let x = [];
 let y = [];
 
@@ -17,7 +15,6 @@ groupedData.forEach(row => {
   const cgpa = parseFloat(row.roundedCgpa);
   const avgDep = parseFloat(row.avgDepression);
   if (!isNaN(cgpa) && !isNaN(avgDep)) {
-    corrData.push([cgpa, avgDep]);
     x.push(cgpa);
     y.push(avgDep);
   }
@@ -25,6 +22,10 @@ groupedData.forEach(row => {
 
 const r = ss.sampleCorrelation(x, y);
 
+let corrData = makeChartFriendly(groupedData, {
+  x: "roundedCgpa",
+  y: "avgDepression"
+});
 
 drawGoogleChart({
   type: 'LineChart',
@@ -43,7 +44,6 @@ drawGoogleChart({
     legend: 'none'
   }
 });
-
 
 addMdToPage(`
 ---
@@ -65,12 +65,10 @@ Tänk också på att:
 ---
 `);
 
-// Förbered scatterdata för diagrammet
-let scatterData = [['CGPA', 'Depression']];
-for (let i = 0; i < x.length; i++) {
-  scatterData.push([x[i], y[i]]);
-}
-
+let scatterData = makeChartFriendly(groupedData, {
+  x: "roundedCgpa",
+  y: "avgDepression"
+});
 
 drawGoogleChart({
   type: 'ScatterChart',
