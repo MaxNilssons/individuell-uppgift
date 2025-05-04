@@ -65,7 +65,7 @@ Till exempel:
 - Vid studySatisfaction = 1 är andelen deprimerade 71 %
 - Vid studySatisfaction = 5 är andelen 47 %
 
-Men eftersom detta bygger på medelvärden per grupp, kan vi inte vara helt säkra på styrkan i sambandet. Därför räknar vi nedan korrelation på individnivå också.
+Men eftersom detta bygger på medelvärden per grupp, kan jag inte vara helt säkra på styrkan i sambandet. Därför tittar jag nedan korrelation på individnivå också.
 
 ---
 `);
@@ -101,7 +101,7 @@ addMdToPage(`
 
 ## Korrelation per individ
 
-För att fördjupa analysen har vi även räknat korrelation på individnivå – alltså utan att först gruppera svaren.
+För att fördjupa analysen har jag även räknat korrelation på individnivå – alltså utan att först gruppera svaren.
 
 **Korrelationskoefficient (r):** ${r.toFixed(3)}
 

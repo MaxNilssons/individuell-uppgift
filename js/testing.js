@@ -1,6 +1,4 @@
-import addMdToPage from './libs/addMdToPage.js';
-import dbQuery from './libs/dbQuery.js';
-import drawGoogleChart from './libs/drawGoogleChart.js';
+
 
 addMdToPage('## Test av normalfördelning – CGPA');
 
@@ -15,7 +13,7 @@ cgpaData.forEach(row => {
   if (!isNaN(v)) values.push(v);
 });
 
-// Skapa intervallgrupper (bins)
+
 let bins = {};
 let binSize = 0.5;
 
@@ -29,7 +27,7 @@ Object.entries(bins).sort((a, b) => parseFloat(a[0]) - parseFloat(b[0])).forEach
   chartData1.push([parseFloat(cgpa), count]);
 });
 
-// Rita histogram
+
 drawGoogleChart({
   type: 'ColumnChart',
   data: chartData1,

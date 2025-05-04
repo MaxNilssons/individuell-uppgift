@@ -2,11 +2,10 @@
 
 addMdToPage('## Kostvanor och depression');
 
-// Dropdown med svenska könsalternativ
+
 let selectedGender = await addDropdown('Kön', ['Alla', 'Man', 'Kvinna']);
 addMdToPage(`**Valt kön: ${selectedGender}**`);
 
-// Översättning till databaskodning
 let genderFilter = '';
 if (selectedGender === 'Man') {
   genderFilter = `AND gender = 'Male'`;
@@ -21,7 +20,7 @@ const dietLabels = {
   3: 'Hälsosam'
 };
 
-// Hämta medelvärde depression per kostvana
+
 let dietaryDepression = await dbQuery(`
   SELECT dietaryHabits, ROUND(AVG(depression), 2) as depressionRate, COUNT(*) as total 
   FROM result_new 
@@ -30,15 +29,15 @@ let dietaryDepression = await dbQuery(`
   ORDER BY dietaryHabits;
 `);
 
-// Byt ut sifferkoder till text
+
 dietaryDepression.forEach(row => {
   row.dietaryHabits = dietLabels[row.dietaryHabits] || row.dietaryHabits;
 });
 
-// Visa tabell
+
 tableFromData({ data: dietaryDepression });
 
-// Förberedd data för diagram
+
 let dietChartData = [['Kostvanor', 'Depression']];
 dietaryDepression.forEach(row => {
   if (row.dietaryHabits && row.depressionRate !== null) {
@@ -49,7 +48,7 @@ dietaryDepression.forEach(row => {
   }
 });
 
-// Visa stapeldiagram
+
 addMdToPage('### Diagram: Kostvanor och depression');
 drawGoogleChart({
   type: 'ColumnChart',

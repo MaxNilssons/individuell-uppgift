@@ -4,7 +4,7 @@ addMdToPage('## Sömn och depression');
 let selectedGender = await addDropdown('Kön', ['Alla', 'Man', 'Kvinna']);
 addMdToPage(`**Valt kön: ${selectedGender}**`);
 
-// Översätt till databasfilter
+/
 let genderFilter = '';
 if (selectedGender === 'Man') {
   genderFilter = `AND gender = 'Male'`;
@@ -28,7 +28,7 @@ let genderLabel = selectedGender === 'Alla'
 
 addMdToPage(`**Genomsnittlig sömn för ${genderLabel}: ${avgSleep[0].avgSleepDuration} timmar per natt**`);
 
-// Gruppdata per sömntid
+
 let allStudents = await dbQuery(`
   SELECT sleepDuration, ROUND(AVG(depression), 2) as avgDepression, COUNT(*) as total
   FROM result_new

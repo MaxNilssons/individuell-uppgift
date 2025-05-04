@@ -25,7 +25,7 @@ groupedData.forEach(row => {
 
 const r = ss.sampleCorrelation(x, y);
 
-// Visa linjediagram för medelvärden
+
 drawGoogleChart({
   type: 'LineChart',
   data: corrData,
@@ -44,7 +44,7 @@ drawGoogleChart({
   }
 });
 
-// Tolkning under linjediagrammet
+
 addMdToPage(`
 ---
 
@@ -65,13 +65,13 @@ Tänk också på att:
 ---
 `);
 
-// Förbered scatterdata
+// Förbered scatterdata för diagrammet
 let scatterData = [['CGPA', 'Depression']];
 for (let i = 0; i < x.length; i++) {
   scatterData.push([x[i], y[i]]);
 }
 
-// Visa scatterdiagram
+
 drawGoogleChart({
   type: 'ScatterChart',
   data: scatterData,
@@ -86,7 +86,6 @@ drawGoogleChart({
   }
 });
 
-// Analys under scatterdiagrammet
 addMdToPage(`
 ---
 
